@@ -1,37 +1,56 @@
 public class Queen extends Piece {
-	
-	public Queen(int color, int row, int col) { super(color,row,col); }
-	
-	@Override
-	public boolean isValidMove(int rank, int file, Piece[][] board) {
-		int rankDelta = Math.abs(rank - this.getRank());
-		int fileDelta = Math.abs(file - this.getFile());
-		
-		boolean isStraight = (this.getRank() == rank || this.getFile() == file);
-		boolean isDiagonal = (rankDelta == fileDelta);
-		if (!isStraight && !isDiagonal) { return false; }
-		if (this.getRank() == rank && this.getFile() == file) { return false; }
-		
-		int rankStep = Integer.compare(rank, this.getRank());
-		int fileStep = Integer.compare(file, this.getFile());
-		
-		int currentRank = this.getRank() + rankStep;
-		int currentFile = this.getFile() + fileStep;
-		
-		while (currentRank != rank && currentFile != file) {
-			if (board[currentFile][currentFile]) { return false; }
-			currentRank += rankStep;
-			currentFile += fileStep;
-		}
-		
-		Piece targetPiece = board[rank][file];
-		if (targetPiece && targetPiece.getColor() == this.getColor()) { return false; }
-		
-		return true;
-	}
-	
-	@Override
-	public String toString() { return getColor() ? "BQ" : "WQ"; }
-	
-	
+
+    public Queen(int color, int row, int col) {
+        super(color, row, col);
+    }
+
+    @Override
+    public boolean isValidMove(int rank, int file, Piece[][] board) {
+        int rankDelta = Math.abs(rank - this.getRank());
+        int fileDelta = Math.abs(file - this.getFile());
+
+        boolean isStraight =
+                this.getRank() == rank || this.getFile() == file;
+        boolean isDiagonal = rankDelta == fileDelta;
+
+        // A queen moves horizontally, vertically, or diagonally.
+        if (!isStraight && !isDiagonal) {
+            return false;
+        }
+
+        if (rankDelta == 0 && fileDelta == 0) {
+            return false;
+        }
+
+        int rankStep = Integer.compare(rank, this.getRank());
+        int fileStep = Integer.compare(file, this.getFile());
+
+        int currentRank = this.getRank() + rankStep;
+        int currentFile = this.getFile() + fileStep;
+
+        // Check every square before the destination.
+        while (currentRank != rank || currentFile != file) {
+            if (board[currentRank][currentFile] != null) {
+                return false;
+            }
+
+            currentRank += rankStep;
+            currentFile += fileStep;
+        }
+
+        Piece targetPiece = board[rank][file];
+
+        // Cannot capture a piece of the same color.
+        if (targetPiece != null
+                && targetPiece.getColor() == this.getColor()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return getColor() == 1 ? "bQ" : "wQ";
+    }
 }
