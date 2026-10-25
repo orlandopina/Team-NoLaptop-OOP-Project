@@ -31,3 +31,11 @@
 - Result: All classes compiled. Ran BoardTest successfully to check
   starting pieces, a blocked rook, pawn moves, and a pawn capture.
 - AI created the commit: No.
+## October 25, 2026 — Console and board integration
+- Asked: Help connect the console input loop to the board.
+- Used or changed: Added a Board field and constructor, displayed
+  the board each loop, and passed converted coordinates to movePiece().
+- Result: Tested a blocked rook, pawn moves, a capture, an empty
+  starting square, invalid text, and quit. All behaved as expected.
+  Turn-taking is not implemented yet.
+- AI created the commit: No.

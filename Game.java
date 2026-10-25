@@ -4,6 +4,13 @@ import java.util.Scanner;
  * Handles the chess game's console interface.
  */
 public class Game {
+    /** The board used by this game. */
+private final Board board;
+
+/** Creates a game with the pieces in their starting positions. */
+public Game() {
+    board = new Board();
+}
 
     /**
      * Starts the application.
@@ -24,7 +31,8 @@ public class Game {
         System.out.println("Enter a move like E2 E4, or quit to exit.");
 
         while (true) {
-            System.out.print("Enter move: ");
+        board.printBoard();
+        System.out.print("Enter move: ");
 
             if (!input.hasNextLine()) {
                 break;
@@ -48,10 +56,14 @@ int startColumn = getColumn(squares[0]);
 int targetRow = getRow(squares[1]);
 int targetColumn = getColumn(squares[1]);
 
-System.out.println("From: row " + startRow
-        + ", column " + startColumn);
-System.out.println("To: row " + targetRow
-        + ", column " + targetColumn);
+boolean moved = board.movePiece(
+        startRow, startColumn, targetRow, targetColumn);
+
+if (moved) {
+    System.out.println("Move successful.");
+} else {
+    System.out.println("Invalid move. Try again.");
+}
         }
 
         System.out.println("Game ended.");
