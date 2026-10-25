@@ -13,11 +13,12 @@ public abstract class Piece {
 		this.hasMoved = false;
 	}
 	
-	public getColor() {return this.color}
-	public getRank() {return this.position_rank}
-	public getFile() {return this.position_file}
+	public int getColor() {return this.color;}
+	public int getRank() {return this.position_rank;}
+	public int getFile() {return this.position_file;}
+
 	
-	public abstract isValid(int rank, int file, Piece[][] board);
+	public abstract boolean isValid(int rank, int file, Piece[][] board);
 	
 	public void setPosition(int rank, int file) {
 		this.position_rank = rank;
