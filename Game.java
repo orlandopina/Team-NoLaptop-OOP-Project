@@ -7,9 +7,13 @@ public class Game {
     /** The board used by this game. */
 private final Board board;
 
+/** Current player: 0 is White, 1 is Black. */
+private int currentTurn;
+
 /** Creates a game with the pieces in their starting positions. */
 public Game() {
     board = new Board();
+    currentTurn = 0;
 }
 
     /**
@@ -32,7 +36,8 @@ public Game() {
 
         while (true) {
         board.printBoard();
-        System.out.print("Enter move: ");
+        String player = currentTurn == 0 ? "White" : "Black";
+        System.out.print(player + " to move: ");
 
             if (!input.hasNextLine()) {
                 break;
@@ -56,11 +61,32 @@ int startColumn = getColumn(squares[0]);
 int targetRow = getRow(squares[1]);
 int targetColumn = getColumn(squares[1]);
 
+Piece movingPiece = board.getPiece(startRow, startColumn);
+
+if (movingPiece == null) {
+    System.out.println("There is no piece on that starting square.");
+    continue;
+}
+
+if (movingPiece.getColor() != currentTurn) {
+    System.out.println("Choose one of your own pieces.");
+    continue;
+}
+
+Piece targetPiece = board.getPiece(targetRow, targetColumn);
+
+if (targetPiece != null
+        && targetPiece.getColor() == currentTurn) {
+    System.out.println("You cannot move onto your own piece.");
+    continue;
+}
+
 boolean moved = board.movePiece(
         startRow, startColumn, targetRow, targetColumn);
 
 if (moved) {
     System.out.println("Move successful.");
+    currentTurn = 1 - currentTurn;
 } else {
     System.out.println("Invalid move. Try again.");
 }
