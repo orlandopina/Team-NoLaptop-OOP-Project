@@ -8,3 +8,11 @@
   Input was echoed, the prompt repeated, and QUIT ended the program.
   Board integration and move validation are not implemented yet.
 - AI created the commit: No.
+## October 25, 2026 — Move-format validation
+- Asked: Help validate move input before connecting it to the board.
+- Used or changed: Added isValidMoveFormat() and an error message
+  that lets the player retry. Accepts lowercase and extra spaces.
+- Result: Tested valid coordinates, lowercase input, extra spaces,
+  an invalid rank, text, blank input, and quit. All worked as expected.
+  This checks formatting only, not whether a move is legal.
+- AI created the commit: No.

@@ -36,9 +36,41 @@ public class Game {
                 break;
             }
 
-            System.out.println("You entered: " + move);
+            if (!isValidMoveFormat(move)) {
+    System.out.println("Invalid format. Enter a move like E2 E4.");
+    continue;
+}
+
+System.out.println("Valid move format: " + move);
         }
 
         System.out.println("Game ended.");
     }
+    /**
+ * Checks whether input contains two valid chess coordinates.
+ * @param move the player's input
+ * @return true if the format is valid
+ */
+private boolean isValidMoveFormat(String move) {
+    String[] squares = move.trim().split("\\s+");
+
+    if (squares.length != 2) {
+        return false;
+    }
+
+    for (String square : squares) {
+        if (square.length() != 2) {
+            return false;
+        }
+
+        char file = Character.toUpperCase(square.charAt(0));
+        char rank = square.charAt(1);
+
+        if (file < 'A' || file > 'H' || rank < '1' || rank > '8') {
+            return false;
+        }
+    }
+
+    return true;
+}
 }
