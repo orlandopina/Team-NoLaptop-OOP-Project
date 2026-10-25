@@ -1,3 +1,5 @@
+package board;
+
 public class Board {
 	private static final int BOARD_SIZE = 8;
 	private final Piece[][] grid;

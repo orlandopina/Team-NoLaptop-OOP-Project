@@ -1,3 +1,5 @@
+package Pieces;
+
 public abstract class Piece {
 	private int color; //0 is White, 1 is Black
 	private int position_rank; //Array Row Index

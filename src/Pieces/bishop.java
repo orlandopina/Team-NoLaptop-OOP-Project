@@ -1,11 +1,14 @@
-public class Rook extends Piece {
+package Pieces;
+
+public class Bishop extends Piece {
 	
-	public Rook(int color, int row, int col) { super(color,row,col); }
+	public Bishop(int color, int row, int col) { super(color,row,col); }
 	
 	@Override
 	public boolean isValidMove(int rank, int file, Piece[][] board) {
-		if (this.getRank() != rank && this.getFile() != file) { return false; }
-		if (this.getRank() == rank && this.getFile() == file) { return false; }
+		int rankDelta = Math.abs(rank - this.getRank());
+		int fileDelta = Math.abs(file - this.getFile());
+		if (rankDelta != fileDelta || rankDelta == 0) { return false; }
 		
 		int rankStep = Integer.compare(rank, this.getRank());
 		int fileStep = Integer.compare(file, this.getFile());
@@ -26,7 +29,7 @@ public class Rook extends Piece {
 	}
 	
 	@Override
-	public String toString() { return getColor() ? "BR" : "WR"; }
+	public String toString() { return getColor() ? "BB" : "WB"; }
 	
 	
 }
