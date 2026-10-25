@@ -16,3 +16,10 @@
   an invalid rank, text, blank input, and quit. All worked as expected.
   This checks formatting only, not whether a move is legal.
 - AI created the commit: No.
+## October 25, 2026 — Coordinate conversion
+- Asked: Help convert chess coordinates into board array indexes.
+- Used or changed: Added getRow() and getColumn(), then displayed
+  the source and destination indexes after validating input.
+- Result: Tested E2 E4, A8 H1, and b1 c3. All indexes matched
+  the expected values. Board integration is still pending.
+- AI created the commit: No.

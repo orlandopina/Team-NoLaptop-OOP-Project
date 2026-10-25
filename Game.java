@@ -41,7 +41,17 @@ public class Game {
     continue;
 }
 
-System.out.println("Valid move format: " + move);
+String[] squares = move.split("\\s+");
+
+int startRow = getRow(squares[0]);
+int startColumn = getColumn(squares[0]);
+int targetRow = getRow(squares[1]);
+int targetColumn = getColumn(squares[1]);
+
+System.out.println("From: row " + startRow
+        + ", column " + startColumn);
+System.out.println("To: row " + targetRow
+        + ", column " + targetColumn);
         }
 
         System.out.println("Game ended.");
@@ -72,5 +82,22 @@ private boolean isValidMoveFormat(String move) {
     }
 
     return true;
+}
+/**
+ * Converts a chess rank to a board row.
+ * @param square a validated coordinate, such as E2
+ * @return the array row from 0 to 7
+ */
+private int getRow(String square) {
+    return '8' - square.charAt(1);
+}
+
+/**
+ * Converts a chess file to a board column.
+ * @param square a validated coordinate, such as E2
+ * @return the array column from 0 to 7
+ */
+private int getColumn(String square) {
+    return Character.toUpperCase(square.charAt(0)) - 'A';
 }
 }
