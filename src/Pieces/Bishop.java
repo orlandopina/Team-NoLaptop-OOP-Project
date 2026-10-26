@@ -1,11 +1,29 @@
 package Pieces;
 
+/**
+ * Represents a bishop, which moves any number of squares diagonally.
+ */
 public class Bishop extends Piece {
 
+    /**
+     * Creates a bishop at a board position.
+     *
+     * @param color piece color (0 is white, 1 is black)
+     * @param row starting row
+     * @param col starting column
+     */
     public Bishop(int color, int row, int col) {
         super(color, row, col);
     }
 
+    /**
+     * Checks whether the bishop can move to the destination.
+     *
+     * @param rank destination row
+     * @param file destination column
+     * @param board current board
+     * @return true if the move follows bishop rules
+     */
     @Override
     public boolean isValidMove(int rank, int file, Piece[][] board) {
         int rankDelta = Math.abs(rank - this.getRank());
@@ -43,6 +61,11 @@ public class Bishop extends Piece {
         return true;
     }
 
+    /**
+     * Returns the board symbol for this piece.
+     *
+     * @return "wB" for a white bishop or "bB" for a black bishop
+     */
     @Override
     public String toString() {
         return getColor() == 1 ? "bB" : "wB";

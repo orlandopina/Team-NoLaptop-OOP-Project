@@ -3,23 +3,28 @@ package board;
 import Pieces.*;
 
 /**
- * Represents the chessboard for the game.
- * Stores chess pieces, initializes their positions,
- * and handles moving and displaying pieces.
+ * Represents the chessboard for the game. Stores chess pieces, initializes
+ * their positions, and handles moving and displaying pieces.
  */
 public class Board {
 
-    /** Defines the size of the chessboard. */
+    /**
+     * Defines the size of the chessboard.
+     */
     private static final int BOARD_SIZE = 8;
 
-    /** Stores all chess pieces in an 8x8 array. */
+    /**
+     * Stores all chess pieces in an 8x8 array.
+     */
     private final Piece[][] grid;
 
     /**
-     * Creates a chessboard and places the pieces
-     * in their starting positions.
+     * Creates a chessboard and places the pieces in their starting positions.
      */
-    public Board() {this.grid = new Piece[BOARD_SIZE][BOARD_SIZE];initializeBoard();}
+    public Board() {
+        this.grid = new Piece[BOARD_SIZE][BOARD_SIZE];
+        initializeBoard();
+    }
 
     /**
      * Initializes the chessboard with black and white pieces.
@@ -28,7 +33,6 @@ public class Board {
 
         // COLOR = 1 => BLACK
         // COLOR = 0 => WHITE
-
         // BLACK PIECES
         grid[0][0] = new Rook(1, 0, 0);
         grid[0][7] = new Rook(1, 0, 7);
@@ -39,7 +43,9 @@ public class Board {
         grid[0][3] = new Queen(1, 0, 3);
         grid[0][4] = new King(1, 0, 4);
 
-        for (int c = 0; c < BOARD_SIZE; c++) {grid[1][c] = new Pawn(1, 1, c);}
+        for (int c = 0; c < BOARD_SIZE; c++) {
+            grid[1][c] = new Pawn(1, 1, c);
+        }
 
         // WHITE PIECES
         grid[7][0] = new Rook(0, 7, 0);
@@ -51,7 +57,9 @@ public class Board {
         grid[7][3] = new Queen(0, 7, 3);
         grid[7][4] = new King(0, 7, 4);
 
-        for (int c = 0; c < BOARD_SIZE; c++) {grid[6][c] = new Pawn(0, 6, c);}
+        for (int c = 0; c < BOARD_SIZE; c++) {
+            grid[6][c] = new Pawn(0, 6, c);
+        }
     }
 
     /**
@@ -63,9 +71,9 @@ public class Board {
      * @param targetFile The destination column.
      * @return true if the move succeeds, false otherwise.
      */
-    public boolean movePiece(int startRank, int startFile,int targetRank, int targetFile) {
+    public boolean movePiece(int startRank, int startFile, int targetRank, int targetFile) {
 
-        if (isOutOfBounds(startRank, startFile) ||isOutOfBounds(targetRank, targetFile)) {
+        if (isOutOfBounds(startRank, startFile) || isOutOfBounds(targetRank, targetFile)) {
             return false;
         }
 
@@ -110,8 +118,8 @@ public class Board {
      * @return true if the position is outside the board.
      */
     private boolean isOutOfBounds(int row, int col) {
-        return row < 0 || row >= BOARD_SIZE ||
-               col < 0 || col >= BOARD_SIZE;
+        return row < 0 || row >= BOARD_SIZE
+                || col < 0 || col >= BOARD_SIZE;
     }
 
     /**
