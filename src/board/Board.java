@@ -75,7 +75,7 @@ public class Board {
             return false;
         }
 
-        if (!movingPiece.isValid(targetRank, targetFile, grid)) {
+        if (!movingPiece.isValidMove(targetRank, targetFile, grid)) {
             return false;
         }
 
@@ -130,7 +130,7 @@ public class Board {
                 Piece piece = grid[r][c];
 
                 if (piece == null) {
-                    System.out.print(".. ");
+                    System.out.print("## ");
                 } else {
                     System.out.print(piece + " ");
                 }
