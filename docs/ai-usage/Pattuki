@@ -1,0 +1,25 @@
+AI Usage: PattuKi
+
+October 25, 2026 - Project setup
+- Asked: How to set up VS Code, Git, and Java on a new computer, and how to start the Phase 1 assignment.
+- Used or changed: Used AI tips to fix a folder mistake (moved the project from System32 to Documents) and followed step-by-step instructions to set up the coding environment.
+- Result: Got the game running, displayed the board, and made sure inputs and moves worked correctly.
+- AI created the commit: No.
+
+October 25, 2026 - Javadoc for piece classes
+- Asked: How to write good Javadoc comments for piece classes, and to check Board and Game for missing comments.
+- Used or changed: Used AI examples and class slides to help write Javadoc comments for Bishop, Rook, Knight, Queen, Pawn, and King. Rewrote the Game.start() comment in my own words and committed each file one by one.
+- Result: Created Javadoc documentation with no errors (only 5 harmless warnings).
+- AI created the commit: No.
+
+October 25, 2026 - JUnit tests
+- Asked: How to turn a manual BoardTest into real JUnit tests and write extra tests for Utils.
+- Used or changed: Used AI code examples to help write test/board/BoardTest.java and test/utils/UtilsTest.java, deleted the old test file, and set up the lib folder in VS Code.
+- Result: Passed all 11 tests in the command line (learned the red lines in VS Code were just a display issue).
+- AI created the commit: No.
+
+October 25, 2026 - Rubric and Git workflow
+- Asked: Help comparing my project and Git history against the grading rubric.
+- Used or changed: Used AI feedback to spot mistakes and made a plan to update old README commands and add missing documents.
+- Result: Came up with a clear plan to fix my Git setup to match the class requirements.
+- AI created the commit: No.
