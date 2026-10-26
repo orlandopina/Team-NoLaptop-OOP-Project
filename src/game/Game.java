@@ -1,35 +1,42 @@
 package game;
 
-import board.Board;
 import Pieces.Piece;
-
+import board.Board;
 import java.util.Scanner;
 
 /**
  * Handles the chess game's console interface.
  */
 public class Game {
-    /** The board used by this game. */
+
+    /**
+     * The board used by this game.
+     */
     private final Board board;
 
-    /** Current player: 0 is White, 1 is Black. */
+    /**
+     * Current player: 0 is White, 1 is Black.
+     */
     private int currentTurn;
 
-    /** Creates a game with the pieces in their starting positions. */
+    /**
+     * Creates a game with the pieces in their starting positions.
+     */
     public Game() {
         board = new Board();
         currentTurn = 0;
     }
+
     /**
- * Starts the console game.
- */
-public void start() {
-    play();
-}
+     * Starts the console game by running the main game loop.
+     */
+    public void start() {
+        play();
+    }
 
     /**
      * Starts the application.
-     * 
+     *
      * @param args unused command-line arguments
      */
     public static void main(String[] args) {
@@ -109,7 +116,7 @@ public void start() {
 
     /**
      * Checks whether input contains two valid chess coordinates.
-     * 
+     *
      * @param move the player's input
      * @return true if the format is valid
      */
@@ -138,7 +145,7 @@ public void start() {
 
     /**
      * Converts a chess rank to a board row.
-     * 
+     *
      * @param square a validated coordinate, such as E2
      * @return the array row from 0 to 7
      */
@@ -148,7 +155,7 @@ public void start() {
 
     /**
      * Converts a chess file to a board column.
-     * 
+     *
      * @param square a validated coordinate, such as E2
      * @return the array column from 0 to 7
      */
