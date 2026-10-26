@@ -1,6 +1,8 @@
-public class Queen extends Piece {
+package Pieces;
 
-    public Queen(int color, int row, int col) {
+public class Bishop extends Piece {
+
+    public Bishop(int color, int row, int col) {
         super(color, row, col);
     }
 
@@ -9,16 +11,8 @@ public class Queen extends Piece {
         int rankDelta = Math.abs(rank - this.getRank());
         int fileDelta = Math.abs(file - this.getFile());
 
-        boolean isStraight =
-                this.getRank() == rank || this.getFile() == file;
-        boolean isDiagonal = rankDelta == fileDelta;
-
-        // A queen moves horizontally, vertically, or diagonally.
-        if (!isStraight && !isDiagonal) {
-            return false;
-        }
-
-        if (rankDelta == 0 && fileDelta == 0) {
+        // A diagonal move changes row and column by equal amounts.
+        if (rankDelta != fileDelta || rankDelta == 0) {
             return false;
         }
 
@@ -51,6 +45,6 @@ public class Queen extends Piece {
 
     @Override
     public String toString() {
-        return getColor() == 1 ? "bQ" : "wQ";
+        return getColor() == 1 ? "bB" : "wB";
     }
 }

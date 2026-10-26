@@ -1,16 +1,20 @@
-public class Bishop extends Piece {
+package Pieces;
 
-    public Bishop(int color, int row, int col) {
+public class Rook extends Piece {
+
+    public Rook(int color, int row, int col) {
         super(color, row, col);
     }
 
     @Override
     public boolean isValidMove(int rank, int file, Piece[][] board) {
-        int rankDelta = Math.abs(rank - this.getRank());
-        int fileDelta = Math.abs(file - this.getFile());
+        // A rook must stay in the same row or column.
+        if (this.getRank() != rank && this.getFile() != file) {
+            return false;
+        }
 
-        // A diagonal move changes row and column by equal amounts.
-        if (rankDelta != fileDelta || rankDelta == 0) {
+        // The destination must differ from the starting square.
+        if (this.getRank() == rank && this.getFile() == file) {
             return false;
         }
 
@@ -20,7 +24,7 @@ public class Bishop extends Piece {
         int currentRank = this.getRank() + rankStep;
         int currentFile = this.getFile() + fileStep;
 
-        // Check every square before the destination.
+        // Check every square between the start and destination.
         while (currentRank != rank || currentFile != file) {
             if (board[currentRank][currentFile] != null) {
                 return false;
@@ -32,7 +36,7 @@ public class Bishop extends Piece {
 
         Piece targetPiece = board[rank][file];
 
-        // Cannot capture a piece of the same color.
+        // A rook cannot capture a piece of its own color.
         if (targetPiece != null
                 && targetPiece.getColor() == this.getColor()) {
             return false;
@@ -43,6 +47,6 @@ public class Bishop extends Piece {
 
     @Override
     public String toString() {
-        return getColor() == 1 ? "bB" : "wB";
+        return getColor() == 1 ? "bR" : "wR";
     }
 }

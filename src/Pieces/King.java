@@ -1,6 +1,8 @@
-public class Knight extends Piece {
+package Pieces;
 
-    public Knight(int color, int row, int col) {
+public class King extends Piece {
+
+    public King(int color, int row, int col) {
         super(color, row, col);
     }
 
@@ -9,9 +11,9 @@ public class Knight extends Piece {
         int rankDelta = Math.abs(rank - this.getRank());
         int fileDelta = Math.abs(file - this.getFile());
 
-        // Move two squares along one axis and one along the other.
-        if (!((rankDelta == 1 && fileDelta == 2)
-                || (rankDelta == 2 && fileDelta == 1))) {
+        // Move exactly one square in any direction.
+        if (rankDelta > 1 || fileDelta > 1
+                || (rankDelta == 0 && fileDelta == 0)) {
             return false;
         }
 
@@ -28,6 +30,6 @@ public class Knight extends Piece {
 
     @Override
     public String toString() {
-        return getColor() == 1 ? "bN" : "wN";
+        return getColor() == 1 ? "bK" : "wK";
     }
 }
