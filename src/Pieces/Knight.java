@@ -1,11 +1,30 @@
 package Pieces;
 
+/**
+ * Represents a knight, which moves in an L shape and can jump over other
+ * pieces.
+ */
 public class Knight extends Piece {
 
+    /**
+     * Creates a knight at a board position.
+     *
+     * @param color piece color (0 is white, 1 is black)
+     * @param row starting row
+     * @param col starting column
+     */
     public Knight(int color, int row, int col) {
         super(color, row, col);
     }
 
+    /**
+     * Checks whether the knight can move to the destination. 
+     *
+     * @param rank destination row
+     * @param file destination column
+     * @param board current board
+     * @return true if the move follows knight rules
+     */
     @Override
     public boolean isValidMove(int rank, int file, Piece[][] board) {
         int rankDelta = Math.abs(rank - this.getRank());
@@ -28,6 +47,11 @@ public class Knight extends Piece {
         return true;
     }
 
+    /**
+     * Returns the board symbol for this piece.
+     *
+     * @return "wN" for a white knight or "bN" for a black knight
+     */
     @Override
     public String toString() {
         return getColor() == 1 ? "bN" : "wN";
