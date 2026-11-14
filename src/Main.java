@@ -11,6 +11,7 @@ public class Main {
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
+        gui.ChessBoardGUI.main(args);
         Game game = new Game();
         game.start();
     }
