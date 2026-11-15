@@ -83,9 +83,56 @@ public class Board {
             return false;
         }
 
-        if (!movingPiece.isValidMove(targetRank, targetFile, grid)) {
-            return false;
+       
+        /**
+         *  Moves a chess piece to another square.
+         * Movement validation is not required for Phase 2.
+         *
+         * @param startRank Starting row
+         * @param startFile Starting column
+         * @param targetRank Destination row
+         * @param targetFile Destination column
+         * @return true if the piece moved, false otherwise
+         */
+        public boolean movePiece(int startRank, int startFile, int targetRank, int targetFile) {
+
+            /** Check that both positions are on the board */
+            if (isOutOfBounds(startRank, startFile) ||
+                isOutOfBounds(targetRank, targetFile)) {
+                return false;
+            }
+
+            /** Get the piece being moved */
+            Piece movingPiece = grid[startRank][startFile];
+
+            /** Cannot move an empty square */
+            if (movingPiece == null) {
+                return false;
+            }
+
+            /** Do nothing if the starting and ending squares are the same */
+            if (startRank == targetRank && startFile == targetFile) {
+                return false;
+            }
+
+            /** Prevent replacing a piece of the same color */
+            Piece targetPiece = grid[targetRank][targetFile];
+
+            if (targetPiece != null &&
+                targetPiece.getColor() == movingPiece.getColor()) {
+                return false;
+            }
+
+            /** Move the piece to its new location */
+            grid[targetRank][targetFile] = movingPiece;
+            grid[startRank][startFile] = null;
+
+            /** Update the piece's stored position */
+            movingPiece.setPosition(targetRank, targetFile);
+
+            return true;
         }
+
 
         grid[targetRank][targetFile] = movingPiece;
         grid[startRank][startFile] = null;

@@ -1,13 +1,12 @@
 package gui;
 
-import board.Board;
 import Pieces.*;
-
-import javax.swing.*;
+import board.Board;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.font.GlyphVector;
 import java.awt.geom.Rectangle2D;
-import java.awt.event.*;
+import javax.swing.*;
 
 /**
  * Swing GUI that displays an 8x8 chessboard with alternating light and dark
@@ -56,6 +55,69 @@ public class ChessBoardGUI extends JPanel {
             handleSquareClick(e.getX(), e.getY());
         }
     });
+}
+
+/**
+ *   Handles selecting and moving chess pieces.
+ *
+ * @param mouseX horizontal mouse position
+ * @param mouseY vertical mouse position
+ */
+private void handleSquareClick(int mouseX, int mouseY) {
+
+    int square = Math.min(getWidth(), getHeight()) / BOARD_SIZE;
+
+    if (square <= 0) {
+        return;
+    }
+
+    int offsetX = (getWidth() - square * BOARD_SIZE) / 2;
+    int offsetY = (getHeight() - square * BOARD_SIZE) / 2;
+
+    int boardX = mouseX - offsetX;
+    int boardY = mouseY - offsetY;
+
+    /** Ignore clicks outside the board */
+    if (boardX < 0 || boardY < 0 ||
+        boardX >= square * BOARD_SIZE ||
+        boardY >= square * BOARD_SIZE) {
+        return;
+    }
+
+    int file = boardX / square;
+    int rank = boardY / square;
+
+    /** First click: Select a piece */
+    if (selectedRank == -1) {
+
+        Piece piece = board.getPiece(rank, file);
+
+        if (piece != null) {
+            selectedRank = rank;
+            selectedFile = file;
+            repaint();
+        }
+
+    } else {
+
+        /** Second click: Move the selected piece */
+        if (selectedRank == rank && selectedFile == file) {
+            selectedRank = -1;
+            selectedFile = -1;
+            repaint();
+            return;
+        }
+
+        /** Move the piece to its new position */
+        board.movePiece(selectedRank, selectedFile, rank, file);
+
+        /** Clear selection */
+        selectedRank = -1;
+        selectedFile = -1;
+
+        /** Update the GUI */
+        repaint();
+    }
 }
 
     /**
@@ -121,11 +183,17 @@ public class ChessBoardGUI extends JPanel {
                 int y = offsetY + rank * square;
                 boolean light = (rank + file) % 2 == 0;
 
-                // Alternating light and dark squares.
+                /** Alternating light and dark squares. */
                 g2.setColor(light ? LIGHT_SQUARE : DARK_SQUARE);
                 g2.fillRect(x, y, square, square);
 
-                // Rank numbers on the left edge, file letters on the bottom edge.
+                /** Highlight the selected piece */
+                if (rank == selectedRank && file == selectedFile) {
+                g2.setColor(new Color(255, 255, 0, 100));
+                g2.fillRect(x, y, square, square);
+                }
+
+                /** Rank numbers on the left edge, file letters on the bottom edge. */
                 g2.setFont(labelFont);
                 g2.setColor(light ? DARK_SQUARE : LIGHT_SQUARE);
                 if (file == 0) {
