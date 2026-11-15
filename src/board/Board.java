@@ -71,29 +71,47 @@ public class Board {
      * @param targetFile The destination column.
      * @return true if the move succeeds, false otherwise.
      */
+    
     public boolean movePiece(int startRank, int startFile, int targetRank, int targetFile) {
 
-        if (isOutOfBounds(startRank, startFile) || isOutOfBounds(targetRank, targetFile)) {
-            return false;
-        }
-
-        Piece movingPiece = grid[startRank][startFile];
-
-        if (movingPiece == null) {
-            return false;
-        }
-
-        if (!movingPiece.isValidMove(targetRank, targetFile, grid)) {
-            return false;
-        }
-
-        grid[targetRank][targetFile] = movingPiece;
-        grid[startRank][startFile] = null;
-
-        movingPiece.setPosition(targetRank, targetFile);
-
-        return true;
+    // Check that both positions are inside the board
+    if (isOutOfBounds(startRank, startFile) ||
+        isOutOfBounds(targetRank, targetFile)) {
+        return false;
     }
+
+    // Get the piece being moved
+    Piece movingPiece = grid[startRank][startFile];
+
+    // Cannot move an empty square
+    if (movingPiece == null) {
+        return false;
+    }
+
+    // Prevent moving to the same square
+    if (startRank == targetRank && startFile == targetFile) {
+        return false;
+    }
+
+    // Prevent moving onto another piece of the same color
+    Piece targetPiece = grid[targetRank][targetFile];
+
+    if (targetPiece != null &&
+        targetPiece.getColor() == movingPiece.getColor()) {
+        return false;
+    }
+
+    // Move the piece to the new square
+    grid[targetRank][targetFile] = movingPiece;
+    grid[startRank][startFile] = null;
+
+    // Update the piece's position
+    movingPiece.setPosition(targetRank, targetFile);
+
+    return true;
+}
+
+
 
     /**
      * Returns the chess piece at a given position.
