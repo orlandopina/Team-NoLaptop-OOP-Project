@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.font.GlyphVector;
 import java.awt.geom.Rectangle2D;
+import java.awt.event.*;
 
 /**
  * Swing GUI that displays an 8x8 chessboard with alternating light and dark
@@ -35,16 +36,27 @@ public class ChessBoardGUI extends JPanel {
     /** Name of an installed font that can draw the chess symbols. */
     private final String pieceFontName;
 
+    /** Tracks the currently selected Piece. */
+    private int selectedRank = -1;
+    private int selectedFile = -1;
     /**
      * Creates a GUI panel that displays the given board.
      *
      * @param board the board to display
      */
     public ChessBoardGUI(Board board) {
-        this.board = board;
-        this.pieceFontName = findChessFont();
-        setPreferredSize(new Dimension(640, 640));
-    }
+    this.board = board;
+    this.pieceFontName = findChessFont();
+    setPreferredSize(new Dimension(640, 640));
+
+    /** Detect mouse clicks on the chessboard */
+    addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            handleSquareClick(e.getX(), e.getY());
+        }
+    });
+}
 
     /**
      * Finds an installed font that can display the Unicode chess symbols.
