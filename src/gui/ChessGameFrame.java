@@ -205,6 +205,19 @@ public class ChessGameFrame extends JFrame {
         if (!file.getName().contains(".")) {
             file = new File(file.getPath() + ".chess");
         }
+        if (file.exists()) {
+    int choice = JOptionPane.showConfirmDialog(
+            this,
+            "This file already exists. Replace it?",
+            "Confirm Overwrite",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+    );
+
+    if (choice != JOptionPane.YES_OPTION) {
+        return;
+    }
+}
 
         List<String> lines = new ArrayList<>();
         lines.add(SAVE_HEADER);
