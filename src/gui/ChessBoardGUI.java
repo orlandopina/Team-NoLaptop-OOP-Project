@@ -406,14 +406,14 @@ private void handleSquareClick(int mouseX, int mouseY) {
      *
      * @param args command-line arguments (unused)
      */
+        
+    /**
+     * Launches the complete Phase 2 chess game.
+     * Includes chessboard, movement, history, Undo,
+     * Save/Load, and endgame notification.
+     */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Chess");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new ChessBoardGUI(new Board()));
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
+        ChessGameFrame.main(args);
     }
+
 }
